@@ -6,12 +6,81 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js" integrity="sha384-Rma6DA2IPUwhNxmrB/7S3Tno0YY7sFu9WSYMCuulLhIqYSGZ2gKCJWIqhBWqMQfh" crossorigin="anonymous"></script>
     <!-- To automatically render math in text elements, include the auto-render extension: -->
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"
-        onload="renderMathInElement(document.body);"></script>
+        onload="renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+          ]
+        });">
+      </script>
   </head>
   <body>
-    <div id="el"><span>$$2+\frac{1}{x}$$</span></div>
-    <script>
-        renderMathInElement(document.body);
-    </script>
+
+
+    <div>
+        <header>Задача 2</header>
+      
+        <p class="text">
+          <i>Целевая функция:</i>
+          <ul>
+            <li>$f_0$ &mdash; суммарные затраты оператора.</li>
+          </ul>
+        </p>
+        <p class="text">
+          <i>Ограничения:</i> 
+          <ul>
+            <li>$f_1$ &mdash; необходиоме количество энергии</li>
+            <li>$f_2$ &mdash; максимально возможное количество выбросов</li>
+          </ul>
+        </p>
+
+        
+        <p class="text">
+          Решение представлено на графике. Допустимое множество значений &mdash; красный конус, ограниченный прямыми 
+          ${x} + {y} = 100$ и $0.8{x} + 0.5{y} = 600$.<br /> 
+          Целевая функция представлена семейством параллельных прямых(фиолетвый пунктир).
+          Оптимальная прямая выделена зеленой жирной линией<vr />
+          $50{x} + 70{y} = 70000$,
+          ${(x,y) = (333.33, 666.67)}$
+        </p>
+
+        <p>
+            <span>$$min\quad{f_0(x,y)}=50{x} + 80{y}$$</span>
+            <span>$$s.t.:\quad{f_1(x,y)}=x+y=1000$$</span>
+            <span>$$\phantom{s.t.:\quad\quad}{f_2(x,y)}=0.8x+0.5y \le 600$$</span>
+        </p>
+        
+    </div>
+
+    <img src="./img/t2.png" alt="gr" width="650rem">
+
+
   </body>
+  <style>
+
+    html {
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    body {
+      max-width: 40rem;
+      width: 100%;
+      padding: 2rem;
+      border: 1px solid #e2e2e2;
+      line-height: 1.5rem;
+    }
+
+    header {
+        font-weight: 600;
+        font-size: 1.5rem;
+        text-decoration: underline;
+    }
+
+
+    .text {
+      font-size: 1.1rem;
+    }
+  </style>
 </html>
