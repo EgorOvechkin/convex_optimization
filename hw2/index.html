@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css" integrity="sha384-zh0CIslj+VczCZtlzBcjt5ppRcsAmDnRem7ESsYwWwg3m/OaJ2l4x7YBZl9Kxxib" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js" integrity="sha384-Rma6DA2IPUwhNxmrB/7S3Tno0YY7sFu9WSYMCuulLhIqYSGZ2gKCJWIqhBWqMQfh" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+          ]
+        });">
+      </script>
+  </head>
+  <body>
+
+    <div class="task_block">
+      <header>Задача 2</header>
+
+      <p class="under">
+        Ребалансировка портфеля активов. 
+      </p>
+
+
+      <p class="hidden">
+        Рассмотрим задачу ребалансировки портфеля активов. 
+        Эта процедура необходима при изменении цен на рынке, 
+        что приводит к переоценке стоимости элементов портфеля и изменению баланса между активами. 
+        Например, в случае выхода позитивного отчёта, стоимость акций некоторой компании может вырасти, 
+        что приведёт к росту её доли в портфеле, а это в свою очередь противоречит долгосрочным целям. 
+        Обозначим целевое распределение средств по активам $w_{target}$, текущее распределение $w_{current}$
+        и $w$ - искомое распределение. Отметим что короткие позиции запрещены, то есть все коэффициенты весов неотрицательны. 
+        Искомое распределение может отличаться от целевого по следующим причинам. 
+        <br />
+        <b>Во-первых,</b> за каждую сделку с активом $i$ необходимо платить комиссию пропорциональную 
+        изменению доли этого актива, коэффициент пропорциональности равен $с_i$ и он известен. 
+        <br />
+        <b>Во-вторых,</b> известны ожидаемые прибыли по каждому активу $\mu_i$
+        и минимально допустимая общая прибыль портфеля $R$, которая должна быть достигнута после ребалансировки. 
+        <br />
+        <b>В-третьих,</b> в случае продажи актива с прибылью необходимо заплатить налог от прибыли, 
+        коэффициенты налога по каждому активу содержатся в векторе $t$. 
+        <br />    
+        Необходимо определить как именно нужно провести ребалансирвку портфеля, чтобы минимизировать издержки этой процедуры и 
+        в то же время приблизиться к целевому распределению активов в портфеле. 
+        Для решения этой задачи поставьте задачу выпуклой оптимизации и докажите, 
+        что полученная вами задача будет именно задачей выпуклой оптимизации.
+      </p>
+      
+    <p>
+        <span class="under">Дано:</span>
+        <ul class="ul_none">
+            <li>$w_{target}$ &mdash; целевое распределение средств по активам</li>
+            <li>$w_{current}$ &mdash; текущее распределение</li>
+            <li>$w$ &mdash; искомое распределение</li>
+            <li>$с_i$ &mdash; коэффициент пропорциональности комисии к изменению доли актива</li>
+            <li>$\mu_i$ &mdash; ожидаемая прибыль актива</li>
+            <li>$R$ &mdash; минимально допустимая доходность портфеля</li>
+            <li>$t$ &mdash; векотор коэффициентов налога на прибыль по каждому активу</li>
+        </ul>
+    </p>
+
+    <p>
+        <span class="under">Тогда:</span>
+        <ul class="mb_05">
+            <li>$\gdef\norm{||w - w_{target}||_{2}^2} \norm$ &mdash; отклонение от целевого распределения</li>
+            <li>
+                $\gdef\tax{t^T\max\{0, w_{current} - w\}} \tax$ &mdash; общий налог за ребалансировку<br />
+                <span class="secondary">$\max\{0, w_{current} - w\}$ &mdash; покомпонентый максимум</span>
+            </li>
+            <li>
+                $\gdef\com{|diag(с)(w - w_{current})|} \com$ &mdash; общая комиссия за ребалансировку,<br />
+                <span class="secondary">$diag(c)$ &mdash; диагональная матрица, на диагонали которой стоят компоненты вектора $c$</span>
+            </li>
+            <li>$diag(\mu)w$ &mdash; вектор прибылей</li>
+            <li>$\gdef \stax{t^T(diag(\mu)w)} \stax$ &mdash; общий налог на прибыль</li>
+            <li>$\gdef \pro{\mu^Tw} \pro$ &mdash; прибыль без учета налога</li>    
+        </ul>
+    </p>
+
+    <p>
+        Необходимо минимизировать отклонение и сумму налогов и комиссий за ребалансирвку. 
+        При этом порфель должен принести доход не меньше ожидаемой прибыли, доли активов не должны быть меньше нуля,
+        сумма долей должна быть равна 1.
+    </p>
+
+    <p>
+
+        $$min_{\substack{\\ w}} \quad \norm + \tax + \com$$
+
+        $$s.t.: \quad \pro - \stax \ge R$$
+        $$ \quad w_i \ge 0 $$
+        $$ \quad \sum_{\substack{i}} w_i = 0 $$
+    </p>
+
+    </div>
+
+  </body>
+  <style>
+
+    html {
+      font-size: 32px;
+      display: flex;
+      justify-content: center;
+    }
+
+    body {
+      /* max-width: 40rem; */
+      width: 100%;
+      padding: 2rem;
+      /* border: 1px solid #e2e2e2; */
+      line-height: 1.5rem;
+    }
+
+    header {
+        font-weight: 600;
+        font-size: 1.5rem;
+        text-decoration: underline;
+    }
+
+    .under {
+      text-decoration: underline;
+    }
+
+    .ul_none {
+      list-style: none;
+    }
+
+    .center {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .task_block {
+      margin-bottom: 4rem;
+    }
+
+    .text {
+      font-size: 1.1rem;
+    }
+
+    .s_text {
+        font-size: 0.6rem;
+    }
+
+    .secondary {
+        color: #4b4a4a;
+        font-style: italic;
+        font-size: 0.9rem;
+    }
+
+    .mb_05 > * {
+        margin-bottom: 0.5rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+  </style>
+</html>
