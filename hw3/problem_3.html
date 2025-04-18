@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css" integrity="sha384-zh0CIslj+VczCZtlzBcjt5ppRcsAmDnRem7ESsYwWwg3m/OaJ2l4x7YBZl9Kxxib" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js" integrity="sha384-Rma6DA2IPUwhNxmrB/7S3Tno0YY7sFu9WSYMCuulLhIqYSGZ2gKCJWIqhBWqMQfh" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+          ]
+        });">
+      </script>
+  </head>
+  <body>
+
+    <div class="task_block">
+      <header>Задача 3</header>
+
+        $\gdef\s{\sum_{i=1}^n e^{x_i}}$
+        $\gdef\f{log(\s)}$
+        $\gdef\g{y^Tx - \f}$
+
+        <article>
+          <p>
+            $f(x) = \f$<br />
+            $Найти \> f^{*}$.
+          </p>
+
+          <p>
+
+            $f^{*}(y) = sup_{x} \{y^Tx - f(x)\} = sup_{x} \{ \g \}\\$
+            <br />
+            Пусть $g(x) = {\g}$
+
+            <ul>
+                <li>$e^{x_i}$ &mdash; выпуклая $\rArr \s$ &mdash; выпуклая.</li>
+                <li>
+                    $\s$ &mdash; выпуклая и не убывает $\rArr \log(\s)$ &mdash; выпуклая $\rArr \\$
+                    $\rArr -\log(\s)$ &mdash; вогнутая
+                </li>
+                <li>$y^Tx$ &mdash; линейна $\rArr g(x)$ &mdash; вогнутая</li>
+            </ul>
+
+            $max \> g(x)$ достигается в $x^*: \nabla g(x^*) = 0$. <br />
+          </p>
+
+          <p>
+            Если $\nabla g(x) = 0$, то <br/>
+            $[\nabla g(x)]_k = \frac{\partial y_kx_k}{\partial x_k} - \frac{\partial \log(\s)}{\partial x_k}$
+            $= y_k - \frac{e^{x_k}}{\s} = 0 \rArr \\$
+            $\rArr y_k = \frac{e^{x_k}}{\s}$ 
+          </p>
+
+          <p class="lh_2">
+            Тогда:
+            <ul class="ul_none lh_2">
+                <li>$y_k \ge 0,$</li>
+                <li>$\sum_{k=1}^n y_k = \frac{e^{x_1} + ... + e^{x_n}}{\s} = 1,\\$</li>
+                <li>$log(y_k) = x_k - log(\s)$</li>
+            </ul>
+            $g(x)$ можно представить в виде: <br />
+          </p>
+
+          <p class="lh_2">
+            ${\g} = \sum_{k=1}^n y_k x_k - log(\s) \sum_{k=1}^n y_k =$
+            $\sum_{k=1}^n y_k x_k - \sum_{k=1}^n y_k log(\s) = \sum_{k=1}^n y_k (x_k - log(\s)) =$
+            $ \sum_{k=1}^n y_k log(y_k)$
+          </p>
+
+          <p class="lh_2">
+            Если $\exist k : y_k < 0$, то $g(x)$ неограниченно возрастает:<br />
+            Мы можем подобрать $x$ так, что $x_k = -t$ и $x_i = 0$ для $i \ne k$, тогда <br /> 
+            $g(x) = {\g} = y_k x_k - log(e^{-x_k} + (n-1)) =\\ = -ty_k - log(e^{-t} + n-1) \\$ 
+            Если $t \to \infty$, то: <br />
+            <ul class="ul_none">
+                <li>$-ty_k \to + \infty$</li>
+                <li>$e^{-t} \to 0$</li>
+                <li>$log(e^{-t} + n-1)$ &mdash; $const$</li>
+            </ul>
+            и $g(x) \to +\infty$. <br />
+          </p>
+
+          <p class="lh_2">
+            Если $y_k \ge 0$, но $\sum_{k=1}^n y_k \not = 1$, $g(x)$ тоже неограниченна:<br />
+            Выберем в качестве $x$ вектор из компонент $t$, тогда <br />
+            $g(x) = y^T x - log(\s) = t \sum_{k=1}^n y_k  - t - log(n) = \\ = t({\sum_{k=1}^n y_k - 1}) - log(n)\\$
+
+            При сумме компонент > 1, сомножитель $t$ > 0 и $g(x) \to +\infty,$ при $t \to \infty$. <br />
+            При сумме компонент < 1, сомножитель $t$ < 0 и $g(x) \to -\infty,$ при $t \to \infty$. <br />
+          </p>
+
+          <p class="under">
+            Ответ: <br />
+
+            $$
+                f^*(y) = 
+                    \begin{cases}
+                        \sum_{k=1}^n y_k log(y_k), \> если \>\> y_k \ge 0, \>\> \sum_{k=1}^n y_k = 1\\
+                        \infty, \> иначе \\
+                    \end{cases}
+            $$
+          </p>
+        </article>
+    </div>
+  </body>
+  <style>
+
+    html {
+      font-size: 32px;
+      display: flex;
+      justify-content: center;
+    }
+
+    body {
+      /* max-width: 40rem; */
+      width: 100%;
+      padding: 2rem;
+      /* border: 1px solid #e2e2e2; */
+      line-height: 1.5rem;
+    }
+
+    header {
+        font-weight: 600;
+        font-size: 1.5rem;
+        text-decoration: underline;
+    }
+
+    .under {
+      text-decoration: underline;
+    }
+
+    .ul_none {
+      list-style: none;
+    }
+
+    .center {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .task_block {
+      margin-bottom: 4rem;
+    }
+
+    .text {
+      font-size: 1.1rem;
+    }
+
+    .s_text {
+        font-size: 0.6rem;
+    }
+
+    .secondary {
+        color: #4b4a4a;
+        font-style: italic;
+        font-size: 0.9rem;
+    }
+
+    .child_mb_05 > * {
+        margin-bottom: 0.5rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .lh_2 {
+        line-height: 2rem;
+    }
+
+  </style>
+</html>
