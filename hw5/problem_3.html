@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css" integrity="sha384-zh0CIslj+VczCZtlzBcjt5ppRcsAmDnRem7ESsYwWwg3m/OaJ2l4x7YBZl9Kxxib" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js" integrity="sha384-Rma6DA2IPUwhNxmrB/7S3Tno0YY7sFu9WSYMCuulLhIqYSGZ2gKCJWIqhBWqMQfh" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+          ]
+        });">
+      </script>
+  </head>
+  <body>
+
+    <div class="task_block lh_2">
+      <header>Задача 3</header>
+
+        $\gdef\f{c^\top x}$
+        $\gdef\sx#1{\sum_{i=1}^n #1_i = 1}$
+        $\gdef\ot{\bold{1}^\top}$
+        $\gdef\l{\lambda}$
+        
+        <article>
+          <p>
+            $
+                \min_{x} \quad f(x) = \f \\
+                \text{ s. t.: } \quad \sx{x}, \\
+                \quad \quad \quad \> x \ge 0 \\
+            $
+          </p>
+          <hr />    
+
+          <p> 
+            Представим задачу в виде задачи линейного программирования:
+            $$
+                \min_{x} \quad f(x) = \f \\
+                \text{ s. t.: } \quad \ot x = 1, \\
+                \quad \quad  x_i \ge 0 \\   
+            $$   
+          </p>
+
+          <p>
+            Заметим, что
+            <ul>
+                <li>$f$ &mdash; выпукла и дифференцируема, в силу линейности</li>
+                <li>Выполнено условие Слейтера: $\exist \bar{x} : \ot \bar{x} = 1 \text{ и } \bar{x_i} > 0, \text{(например } x_i = \frac{1}{n})$ </li>
+            </ul>
+            а значит, оптимальное решение двойственной задачи &mdash; $d^*$ будет совпадать с оптимальным решением прямой задачи &mdash; $p^*$.
+          </p>
+
+          <p>
+            Из лекций известно, что двойственной задачей будет:
+                $$
+                    \max_{\l} \quad g(\l) = -\l b\\
+                    \text{ s. t.: } \quad c + A^\top \l \ge 0 \\
+                $$
+            Здесь $b = 1, A = \ot$, тогда
+                $$
+                    \max_{\l} \quad g(\l) = -\l\\
+                    \text{ s. t.: } \quad c_i \ge - \l, \> i=1...n \\
+                $$
+            Получается, $\l^* = - \min{с_i}, \> i=1...n$ <br />
+            $g(\l^*) = \min c_i \rArr $
+            $$
+                f(x^*) = \min c_i, \\ 
+                \sx{x^*},\\
+                x^*_i \ge 0\\
+            $$
+
+            Обозначим за $k$ мощность множества $\{i \> | \>  c_i = \min c_i, \> i=1...n\}$, тогда
+
+            $$
+                {x^*}_i = \begin{cases}
+                    \frac{1}{k}, & \text{если } c_i = \min c_i, \\
+                    0, & \text{иначе} \\
+                \end{cases} \\
+            $$
+          </p>
+
+         
+
+          <p class="under">
+            Ответ: <br />
+
+            $$
+                {x^*}_i = \begin{cases}
+                    \frac{1}{k}, & \text{если } c_i = \min c_i, \\
+                    0, & \text{иначе} \\
+                \end{cases} \\
+            $$
+          </p>
+        </article>
+    </div>
+  </body>
+  <style>
+
+    html {
+      font-size: 32px;
+      display: flex;
+      justify-content: center;
+    }
+
+    body {
+      /* max-width: 40rem; */
+      width: 100%;
+      padding: 2rem;
+      /* border: 1px solid #e2e2e2; */
+      line-height: 1.5rem;
+    }
+
+    header {
+        font-weight: 600;
+        font-size: 1.5rem;
+        text-decoration: underline;
+    }
+
+    .under {
+      text-decoration: underline;
+    }
+
+    .ul_none {
+      list-style: none;
+    }
+
+    .ul_num {
+      list-style: decimal;
+    }
+
+    .center {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .task_block {
+      margin-bottom: 4rem;
+    }
+
+    .text {
+      font-size: 1.1rem;
+    }
+
+    .s_text {
+        font-size: 0.6rem;
+    }
+
+    .secondary {
+        color: #4b4a4a;
+        font-style: italic;
+        font-size: 0.9rem;
+    }
+
+    .child_mb_05 > * {
+        margin-bottom: 0.5rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .lh_2 {
+        line-height: 2rem;
+    }
+
+  </style>
+</html>
