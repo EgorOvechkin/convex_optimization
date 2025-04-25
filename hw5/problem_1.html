@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css" integrity="sha384-zh0CIslj+VczCZtlzBcjt5ppRcsAmDnRem7ESsYwWwg3m/OaJ2l4x7YBZl9Kxxib" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js" integrity="sha384-Rma6DA2IPUwhNxmrB/7S3Tno0YY7sFu9WSYMCuulLhIqYSGZ2gKCJWIqhBWqMQfh" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+          ]
+        });">
+      </script>
+  </head>
+  <body>
+
+    <div class="task_block lh_2">
+      <header>Задача 1</header>
+
+        $\gdef\f{\frac{1}{2} \| x - c\|_2^2}$
+        $\gdef\h{a^\top x - b}$
+        $\gdef\hs{a^\top x^* - b}$
+        $\gdef\dom{\mathbb{R}^n}$
+        $\gdef\am{a^\top \mu^*}$
+
+        
+        <article>
+          <p>
+            $
+                \min_{x \in \dom} \quad f(x) = \f \\
+                \text{ s. t.: } \quad a^\top x \leq b
+            $
+          </p>
+
+          <hr />
+
+          <p>
+            <ul class="ul_num">
+                <li>
+                    $\nabla f(x) = x -c$ <br />
+                    $\nabla^2 f(x) = I \succ 0 \rArr f(x) \text{ &mdash; выпуклая}$ <br />
+                </li>
+                <li>
+                    $dom \> f = \dom \rArr \exist \bar{x} : a^\top \bar{x} < b$
+                </li>
+                <li>
+                    $L(x, \mu) = \f + \mu(\h)$ <br />
+                </li>
+            </ul>
+            1, 2) $\rArr$ выполнены условия ККТ, поэтому: <br />
+            <ul class="ul_num">
+                <li>
+                  $ a^\top x^* \le b $
+                </li>
+                <li>
+                    $ \mu^* \ge 0 $
+                </li>
+                <li>
+                    $ \mu^* (\hs) = 0 $
+                </li>
+                <li>
+                    $ \nabla L(x^*, \mu^*) = x^* - c + \mu^* a = 0 \rArr x^* = c - \mu^* a  $
+                </li>
+            </ul>
+
+            1, 4) $ \rArr a^\top (c - \mu^*a) \le b $ <br />
+            $ a^\top c - \mu^* a^\top a \le b $ <br />
+            $ \mu^* ||a||^2 \ge a^\top c - b $ <br />
+
+            <ul>
+              <li>
+                Если $||a||^2 = 0, \text{то }\\ a = 0, \> x^* = c $ <br />
+                $f(x^*) = 0, \\ b \ge 0$
+              </li>
+              <li>
+
+                $\gdef\mcalc{max \{0,  \frac{a^\top c - b}{||a||^2} \}}$
+                $\gdef\mfrac{\frac{a^\top c - b}{||a||^2} }$
+
+                Если $||a||^2 \ne 0, \text{то }\\ \mu^* = \mcalc$ <br />
+                $x^* = c - \mcalc a$ <br />
+
+                При $\mfrac \le 0, \quad a^\top c \le b \> (т.к. \> ||a||^2 \ge 0), \quad x^* = c$. <br />
+                При $\mfrac > 0, \quad x^* = c - (\mfrac) a,$ <br />
+                $a^\top (c - (\mfrac)a) \le b, \\$ 
+                $a^\top c - a^\top c - b \le b, \\$
+                $-b \le b \rArr b \ge 0$
+
+              </li>
+            </ul>            
+          </p>
+
+         
+
+          <p class="under">
+            Ответ: <br />
+
+            $$
+              x^* = \begin{cases}
+                c, & \text{если } a = 0, b \ge 0, \\
+                c - \mcalc a, & \text{если } a \ne 0, \\
+                \text{не существует}, & \text{если } a = 0, b < 0 \\
+              \end{cases} \\
+            $$
+          </p>
+        </article>
+    </div>
+  </body>
+  <style>
+
+    html {
+      font-size: 32px;
+      display: flex;
+      justify-content: center;
+    }
+
+    body {
+      /* max-width: 40rem; */
+      width: 100%;
+      padding: 2rem;
+      /* border: 1px solid #e2e2e2; */
+      line-height: 1.5rem;
+    }
+
+    header {
+        font-weight: 600;
+        font-size: 1.5rem;
+        text-decoration: underline;
+    }
+
+    .under {
+      text-decoration: underline;
+    }
+
+    .ul_none {
+      list-style: none;
+    }
+
+    .ul_num {
+      list-style: decimal;
+    }
+
+    .center {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .task_block {
+      margin-bottom: 4rem;
+    }
+
+    .text {
+      font-size: 1.1rem;
+    }
+
+    .s_text {
+        font-size: 0.6rem;
+    }
+
+    .secondary {
+        color: #4b4a4a;
+        font-style: italic;
+        font-size: 0.9rem;
+    }
+
+    .child_mb_05 > * {
+        margin-bottom: 0.5rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .lh_2 {
+        line-height: 2rem;
+    }
+
+  </style>
+</html>
