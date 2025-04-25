@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css" integrity="sha384-zh0CIslj+VczCZtlzBcjt5ppRcsAmDnRem7ESsYwWwg3m/OaJ2l4x7YBZl9Kxxib" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js" integrity="sha384-Rma6DA2IPUwhNxmrB/7S3Tno0YY7sFu9WSYMCuulLhIqYSGZ2gKCJWIqhBWqMQfh" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+          ]
+        });">
+      </script>
+  </head>
+  <body>
+
+    <div class="task_block lh_2">
+
+
+        <!--
+            Для задачи 
+            min2x1+3x2 subject to x1+x2≥4,x1≥0,x2≥0
+            найдите решение с помощью графика, постройте двойственную, 
+            также решите её графически и убедитесь, что выполняется сильная двойственность-->
+      <header>Задача 4</header>
+
+        $\gdef\f{2 x_1 + 3 x_2}$
+        $\gdef\l{\lambda}$
+        
+        <article>
+          <p>
+            $
+                \min_{x} \quad f(x) = \f \\
+                \text{ s. t.: } \quad x_1 + x_2 \ge 4, \\
+                \quad \quad \quad \> x_1 \ge 0, \\
+                \quad \quad \quad \> x_2 \ge 0 \\
+            $
+          </p>
+          <hr />    
+
+          <p>
+            Область допустимых решений ограничена прямыми: 
+            $x_1 + x_2 = 4$, $x_1 = 0$, $x_2 = 0$ и обозначена на рисунке красным цветом.
+            <br />
+            Целевая функция $f(x) = \f$ представлена семейством пунктирных прямых. <br />
+            Минимум достигается в точке касания прямой области допустимых значений(зеленая прямая): <br />  
+            $x^* = (4, 0) \\$
+            $p^* = f(x^*) = 8 \\$  
+            <img src="./img/p4_1.png" width="800" alt="">
+          </p>
+
+
+          <p>
+            Найдем двойственную задачу. <br />
+            Представим прямую задачу в виде задачи линейного программирования: <br />
+            $$
+                \min_{x} \quad f(x) = c^\top x \\
+                \text{ s. t.: } \quad A x \ge b, \\
+                \quad \quad  x_i \ge 0 \\
+            $$
+            Здесь $c = (2, 3)$, $A = (1, 1)^\top$, $b = 4$.        
+          </p>
+
+          <p>
+            Двойственной задачей будет: <br />
+            $$
+                \max_{\l} \quad g(\l) = -4\l, \\
+                \text{ s. t.: } \quad (1, 1)\l \ge (-2 , -3) \rArr \l \ge -2\\
+            $$
+            На графике полуплоскость $\l \ge -2$ изображена синим цветом, 
+            целевая функция &mdash; красной прямой. <br />
+            
+            <img src="./img/p4_2.png" width="800" alt=""> <br />
+            $\l^* = (-2, 8) \\$
+            $d^* = g(\l^*) = 8 = p^*\\$ 
+          </p>
+
+          </p>
+        </article>
+    </div>
+  </body>
+  <style>
+
+    html {
+      font-size: 32px;
+      display: flex;
+      justify-content: center;
+    }
+
+    body {
+      /* max-width: 40rem; */
+      width: 100%;
+      padding: 2rem;
+      /* border: 1px solid #e2e2e2; */
+      line-height: 1.5rem;
+    }
+
+    header {
+        font-weight: 600;
+        font-size: 1.5rem;
+        text-decoration: underline;
+    }
+
+    .under {
+      text-decoration: underline;
+    }
+
+    .ul_none {
+      list-style: none;
+    }
+
+    .ul_num {
+      list-style: decimal;
+    }
+
+    .center {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .task_block {
+      margin-bottom: 4rem;
+    }
+
+    .text {
+      font-size: 1.1rem;
+    }
+
+    .s_text {
+        font-size: 0.6rem;
+    }
+
+    .secondary {
+        color: #4b4a4a;
+        font-style: italic;
+        font-size: 0.9rem;
+    }
+
+    .child_mb_05 > * {
+        margin-bottom: 0.5rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .lh_2 {
+        line-height: 2rem;
+    }
+
+  </style>
+</html>
